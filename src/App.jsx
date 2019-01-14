@@ -8,87 +8,87 @@ import Details from "./Details";
 import SearchBox from "./SearchBox";
 
 const petfinder = pf({
-  key: "blah",
-  secret: "blah"
-}); //TODO: Pull from a global store
+    key: "8a6826b8a05de7e7d49dbdc2ed9bc7a3",
+    secret: "f272ed0b554bd7e66c265faea27a8fcf"
+});
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: "Seattle, WA",
-      animal: "",
-      breed: "",
-      breeds: [],
-      handleAnimalChange: this.handleAnimalChange,
-      handleBreedChange: this.handleBreedChange,
-      handleLocationChange: this.handleLocationChange,
-      getBreeds: this.getBreeds
-    };
-  }
-
-  getBreeds() {
-    if (this.state.animal) {
-      petfinder.breed.list({ animal: this.state.animal }).then(data => {
-        if (
-          data.petfinder &&
-          data.petfinder.breeds &&
-          Array.isArray(data.petfinder.breeds.breed)
-        ) {
-          this.setState({
-            breeds: data.petfinder.breeds.breed
-          });
-        } else {
-          this.setState({
-            breeds: []
-          });
-        }
-      });
-    } else {
-      this.setState({
-        breeds: []
-      });
+    constructor(props) {
+        super(props);
+        this.state = {
+            location: "Seattle, WA",
+            animal: "",
+            breed: "",
+            breeds: [],
+            handleAnimalChange: this.handleAnimalChange,
+            handleBreedChange: this.handleBreedChange,
+            handleLocationChange: this.handleLocationChange,
+            getBreeds: this.getBreeds
+        };
     }
-  }
 
-  handleLocationChange = event => {
-    this.setState({
-      location: event.target.value
-    });
-  };
+    getBreeds() {
+        if (this.state.animal) {
+            petfinder.breed.list({ animal: this.state.animal }).then(data => {
+                if (
+                    data.petfinder &&
+                    data.petfinder.breeds &&
+                    Array.isArray(data.petfinder.breeds.breed)
+                ) {
+                    this.setState({
+                        breeds: data.petfinder.breeds.breed
+                    });
+                } else {
+                    this.setState({
+                        breeds: []
+                    });
+                }
+            });
+        } else {
+            this.setState({
+                breeds: []
+            });
+        }
+    }
 
-  handleAnimalChange = event => {
-    this.setState(
-      {
-        animal: event.target.value,
-        breed: ""
-      },
-      this.getBreeds
-    );
-  };
+    handleLocationChange = event => {
+        this.setState({
+            location: event.target.value
+        });
+    };
 
-  handleBreedChange = event => {
-    this.setState({
-      breed: event.target.value
-    });
-  };
+    handleAnimalChange = event => {
+        this.setState(
+            {
+                animal: event.target.value,
+                breed: ""
+            },
+            this.getBreeds
+        );
+    };
 
-  render() {
-    return (
-      <div>
-        <header>
-          <Link to="/">Adopt Me</Link>
-        </header>
-        <Provider value={this.state}>
-          <Router>
-            <Results path="/" />
-            <Details path="/details/:id" />
-            <SearchBox path="/search-params" />
-          </Router>
-        </Provider>
-      </div>
-    );
-  }
+    handleBreedChange = event => {
+        this.setState({
+            breed: event.target.value
+        });
+    };
+
+    render() {
+        return (
+            <div>
+                <header>
+                    <Link to="/">Adopt Me</Link>
+                </header>
+                <Provider value={this.state}>
+                    <Router>
+                        <Results path="/" />
+                        <Details path="/details/:id" />
+                        <SearchBox path="/search-params" />
+                    </Router>
+                </Provider>
+            </div>
+        );
+    }
 }
 
 render(React.createElement(App), document.getElementById("root"));
