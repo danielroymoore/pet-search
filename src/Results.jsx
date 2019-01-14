@@ -5,8 +5,8 @@ import Pet from "./Pet";
 import SearchBox from "./SearchBox";
 
 const petfinder = pf({
-  key: "8a6826b8a05de7e7d49dbdc2ed9bc7a3",
-  secret: "f272ed0b554bd7e66c265faea27a8fcf"
+  key: "blah",
+  secret: "blah"
 });
 
 class Results extends React.Component {
