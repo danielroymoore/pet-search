@@ -1,16 +1,23 @@
 import React from "react";
 import { render } from "react-dom";
 import { Router } from "@reach/router";
+import Loadable from "react-loadable";
 import pf from "petfinder-client";
 import { Provider } from "./SearchContext";
 import Results from "./Results";
-import Details from "./Details";
 import SearchBox from "./SearchBox";
 import NavBar from "./Navbar";
 
 const petfinder = pf({
   key: "8a6826b8a05de7e7d49dbdc2ed9bc7a3",
   secret: "f272ed0b554bd7e66c265faea27a8fcf"
+});
+
+const LoadableDetails = Loadable({
+  loader: () => import("./Details"),
+  loading() {
+    return <h1>Loading split code</h1>;
+  }
 });
 
 class App extends React.Component {
@@ -81,7 +88,7 @@ class App extends React.Component {
         <Provider value={this.state}>
           <Router>
             <Results path="/" />
-            <Details path="/details/:id" />
+            <LoadableDetails path="/details/:id" />
             <SearchBox path="/search-params" />
           </Router>
         </Provider>
