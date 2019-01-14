@@ -7,10 +7,10 @@ class Pet extends React.Component {
     let photos = [];
 
     if (media && media.photos && media.photos.photo) {
-      photos = media.photos.photo.filter(photo => photo["@size"] == "pn");
+      photos = media.photos.photo.filter(photo => photo["@size"] === "pn");
     }
 
-    let image =
+    const image =
       photos[0] === undefined
         ? "https://www.fillmurray.com/640/360"
         : photos[0].value;
